@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+/**********************************************************************
+ * USERS
+ *********************************************************************/
+Route::resource('/users', 'UserController');
+Auth::routes(['verify' => true, 'register' => false,]);
+
+Route::get('/home', 'HomeController@index')->name('home');

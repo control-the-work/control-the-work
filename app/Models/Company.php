@@ -41,4 +41,12 @@ class Company extends Model
             $instance->id = Uuid::uuid1()->toString();
         });
     }
+
+    /**
+     * Get the users for the company.
+     */
+    public function users()
+    {
+        return $this->hasMany('App\User');
+    }
 }

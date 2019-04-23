@@ -2,13 +2,23 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Ramsey\Uuid\Uuid;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +26,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'company_id',
     ];
 
     /**
@@ -25,7 +38,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -36,4 +50,32 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * Boot the Model.
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($instance) {
+            $instance->id = Uuid::uuid1()->toString();
+        });
+    }
+
+    /**
+     * Get the company that belongs the user
+     */
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
 }
