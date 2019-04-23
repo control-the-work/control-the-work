@@ -11,5 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix.copyDirectory('resources/templates/tabler/dist/assets/css', 'public/assets/css')
+    .copyDirectory('resources/templates/tabler/dist/assets/fonts', 'public/assets/fonts')
+    .copyDirectory('resources/templates/tabler/dist/assets/images', 'public/assets/images')
+    .copyDirectory('resources/templates/tabler/dist/assets/js', 'public/assets/js')
+    .copyDirectory('resources/templates/tabler/dist/assets/plugins', 'public/assets/plugins')
+    ;
