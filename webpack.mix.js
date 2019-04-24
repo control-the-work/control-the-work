@@ -11,9 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.copyDirectory('resources/templates/tabler/dist/assets/css', 'public/assets/css')
-    .copyDirectory('resources/templates/tabler/dist/assets/fonts', 'public/assets/fonts')
-    .copyDirectory('resources/templates/tabler/dist/assets/images', 'public/assets/images')
-    .copyDirectory('resources/templates/tabler/dist/assets/js', 'public/assets/js')
-    .copyDirectory('resources/templates/tabler/dist/assets/plugins', 'public/assets/plugins')
+mix.copyDirectory('resources/assets/templates/tabler/dist/assets/css', 'public/assets/css')
+    .copyDirectory('resources/assets/templates/tabler/dist/assets/fonts', 'public/assets/fonts')
+    .copyDirectory('resources/assets/templates/tabler/dist/assets/js', 'public/assets/js')
+    .copy('resources/assets/images/icons/*.ico', 'public/assets/images/icons')
+    .copy('resources/assets/images/icons/*.png', 'public/assets/images/icons')
+    .copy('resources/assets/images/icons/*.svg', 'public/assets/images/icons')
+    .copy('resources/assets/images/logos/*.png', 'public/assets/images/logos')
+    .copy('resources/assets/images/logos/*.svg', 'public/assets/images/logos')
     ;
