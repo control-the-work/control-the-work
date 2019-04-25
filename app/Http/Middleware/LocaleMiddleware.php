@@ -24,13 +24,12 @@ class LocaleMiddleware
                     App::setLocale(Session::get('locale'));
             } else
             {
-                $availableLanguages = (config('locale.languages'));
                 $userLanguages = preg_split('/,|;/', $request->server('HTTP_ACCEPT_LANGUAGE'));
                 foreach ($userLanguages as $language) {
                     if (in_array($language, array_keys(config('locale.languages')))) {
                         // Set the Laravel locale
                         App::setLocale($language);
-                        
+
                          // Set php setLocale
                         setlocale(LC_TIME, config('locale.languages')[$language][1]);
 
