@@ -22,5 +22,18 @@
   "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser: [:actionURL](:actionURL)" : "Si estás teniendo problemas al hacer clic en el botón \":actionText\", copia y pega la siguiente URL en tu navegador: [:actionURL](:actionURL)",
   "All rights reserved.": "Todos los derechos reservados.",
 
-  "Confirm Password": "Confirma la contraseña"
+  "Confirm Password": "Confirma la contraseña",
+
+  "The system has one company called \":name\". If you continue all data will be erased. Do you want to continue?": "El sistema tiene una empresa llamada \":name\". Si continúas se borrarán todos los datos. ¿Quieres continuar?",
+  "The installer doesn't find some required roles. Please, execute the migration first.": "El instalador no puede encontrar algunos roles. Por favor, ejecuta primero la migración.",
+  "What is your company name?": "¿Cuál es el nombre de la empresa?",
+  "What is the email of the administrator user that will be created?": "¿Cuál es el correo electrónico del usuario administrador que se va a crear?",
+  "What is the password for this user?": "¿Cuál es la contraseña para este usuario?",
+  "Creating the company :companyName.": "Creando la empresa :companyName.",
+  "Creating the user with email :email.": "Creando el usuario con correo electrónico :email.",
+  "Now you will receive a validation email in the address :email. Please, check your inbox.": "Ahora vas a recibir un correo electrónico de validación en la dirección :email. Por favor, comprueba tu bandeja de entrada.",
+
+  "Verify Email Address": "Confirma tu dirección de correo electrónico",
+  "Please click the button below to verify your email address.": "Haz clic en el siguiente botón para verificar tu dirección de correo electrónico.",
+  "If you did not create an account, no further action is required.": "Si no creaste una cuenta, no es necesario realizar ninguna otra acción."
 }

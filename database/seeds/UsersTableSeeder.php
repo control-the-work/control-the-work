@@ -13,10 +13,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $companies = Company::all();
-        $companies->each(function ($company) {
-            factory(App\User::class, 5)
-                ->create(['company_id' => $company->id]);
-        });
+        if (App::environment('local')) {
+            $companies = Company::all();
+            $companies->each(function ($company) {
+                factory(App\User::class, 5)
+                    ->create(['company_id' => $company->id]);
+            });
+        }
     }
 }
