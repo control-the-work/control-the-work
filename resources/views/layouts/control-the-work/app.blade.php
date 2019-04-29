@@ -17,25 +17,33 @@
     <title>{{ env('APP_NAME', 'Control the work') }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-    <script src="{{ asset('assets/js/require.min.js') }}"></script>
+{{--    <script src="{{ asset('assets/js/require.min.js') }}"></script>
     <script>
         requirejs.config({
             baseUrl: '.'
         });
-    </script>
+    </script>--}}
+    <!-- Core JS -->
+    <script src=" {{ asset('assets/js/vendors/jquery-3.2.1.min.js') }}"></script>
+    <script src=" {{ asset('assets/js/core.js') }}"></script>
+    <script src=" {{ asset('assets/js/vendors/bootstrap.bundle.min.js') }}"></script>
+
     <!-- Dashboard Core -->
     <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet"/>
-    <script src=" {{ asset('assets/js/dashboard.js') }}"></script>
+{{--    <script src=" {{ asset('assets/js/dashboard.js') }}"></script>--}}
 {{--    <!-- c3.js Charts Plugin -->
     <link href="{{ asset('assets/plugins/charts-c3/plugin.css') }}" rel="stylesheet" />
     <script src="{{ asset('assets/plugins/charts-c3/plugin.js') }}"></script>
     <!-- Google Maps Plugin -->
     <link href="./assets/plugins/maps-google/plugin.css" rel="stylesheet" />
     <script src="./assets/plugins/maps-google/plugin.js"></script>--}}
-<!-- Input Mask Plugin -->
+{{--<!-- Input Mask Plugin -->
     <script src="{{ asset('assets/plugins/input-mask/plugin.js') }}"></script>
     <!-- Datatables Plugin -->
-    <script src="{{ asset('assets/plugins/datatables/plugin.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/plugin.js') }}"></script>--}}
+    <!-- SweetAlert2 Plugin -->
+    <link href="{{ asset('assets/plugins/sweetalert2/8.9.0/dist/sweetalert2.min.css') }}" rel="stylesheet"/>
+    <script src="{{ asset('assets/plugins/sweetalert2/8.9.0/dist/sweetalert2.all.min.js') }}"></script>
 </head>
 <body class="">
 <div class="page">
@@ -51,7 +59,7 @@
                             <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
                                 <span class="avatar" style="background-image: url({{ asset('assets/images/icons/user-male.svg') }})"></span>
                                 <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">{{ Auth::user()->name }}{{ Auth::user()->surname }}</span>
+                      <span class="text-default">{{ Auth::user()->name }} {{ Auth::user()->surname }}</span>
                       <small class="text-muted d-block mt-1">{{ __(Auth::user()->roles()->first()->name) }}</small>
                     </span>
                             </a>
@@ -104,25 +112,13 @@
                             <div class="card-header">
                                 <h3 class="card-title">Actions</h3>
                             </div>
-                            <div>
-                                <button type="submit" class="btn btn-primary btn-lg ml-3 mt-3">
-                                    <i class="fa fa-play-circle"></i>
-                                    Start workday
-                                </button>
-                                <button type="submit" class="btn btn-danger btn-lg ml-3 mt-3">
-                                    <i class="fa fa-stop-circle"></i>
-                                    End workday
-                                </button>
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-primary btn-lg ml-3 mt-3 mb-3">
-                                    <i class="fa fa-play-circle"></i>
-                                    Start workday
-                                </button>
-                                <button type="submit" class="btn btn-danger btn-lg ml-3 mt-3 mb-3">
-                                    <i class="fa fa-stop-circle"></i>
-                                    End workday
-                                </button>
+                            <div class="mt-3 ml-3">
+                                @foreach($eventTypes as $eventType)
+                                    <p>
+                                        <button type="button" class="btn btn-primary btn-lg start mr-2" id="{{ $eventType->id }}"><i class="fa fa-play-circle"></i> {{ __('Start') }} {{ __($eventType->name) }} </button>
+                                        <button type="button" class="btn btn-danger btn-lg stop" id="{{ $eventType->id }}"><i class="fa fa-stop-circle"></i> {{ __('Stop') }} {{ __($eventType->name) }}</button>
+                                    </p>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -208,5 +204,76 @@
         </div>
     </footer>
 </div>
+<script type="text/javascript">
+    window.onload = function() {
+        $('.start').on('click', function ($event) {
+            if (!($(this).hasClass('disabled'))) {
+                var confirmButtonText = $(this).html();
+                var eventId = $(this).attr('id');
+                storeEvent(confirmButtonText, eventId, true);
+            }
+        });
+        $('.stop').on('click', function ($event) {
+            var confirmButtonText = $(this).html();
+            var eventId = $(this).attr('id');
+            storeEvent(confirmButtonText, eventId, false);
+        });
+    };
+    function disableButtons() {
+        $('button, input:button').prop('disabled', true);
+    }
+
+    function enableButtons() {
+        $('button, input:button').prop('disabled', false);
+    }
+    function storeEvent(confirmButtonText, eventId, isStart) {
+        disableButtons()
+        Swal.fire({
+            title: "{{ __('Are you sure?') }}",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#ec6c62',
+            // cancelButtonColor: '#d33',
+            confirmButtonText: confirmButtonText,
+            cancelButtonText: '{{ __('Cancel') }}',
+        }).then((result) => {
+            console.log(result);
+            if (result.value) {
+                $.ajax({
+                    url: '{{ action('EventController@store') }}',
+                    type: 'POST',
+                    data: {
+                        _method: 'POST',
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        eventId: eventId,
+                        isStart: isStart,
+                    },
+                    success: function () {
+                        Swal.fire({
+                            position: 'top-end',
+                            title: ' {{ __('Created!') }} ',
+                            text: ' {{ __('The event has been created.') }}',
+                            type: "success",
+                            timer: 1500,
+                        }).then(function () {
+                            $('#events-table').DataTable().draw(false);
+                            {{--                        window.location.href = '{{ action('GestionAdministrativaController@index', $administrativo->id) }}'--}}
+                        })
+                    },
+                    error: function () {
+                        Swal.fire({
+                            title: ' {{ __('Error!') }} ',
+                            text: ' {{ __('The event has not been created.') }}',
+                            type: 'error',
+                        });
+                    }
+                })
+            }
+            enableButtons();
+        });
+    }
+</script>
+
 </body>
 </html>
