@@ -42,6 +42,8 @@ class InstallationCommand extends Command
     public function handle()
     {
         try {
+            // todo: check if some .env values are set
+
             // Get the language for the command
             $language = $this->option('language');
             if (config('locale.status')) {

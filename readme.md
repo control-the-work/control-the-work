@@ -80,3 +80,12 @@ All security vulnerabilities will be promptly addressed.
 
 "Control the Work" is open-source software licensed under the 
 [AGPL license](https://opensource.org/licenses/AGPL-3.0).
+
+## Components
+
+This project uses this components:
+
+- [Tabler, a Bootstrap 4 template](https://github.com/tabler/tabler)
+- [Laravel](https://laravel.com/)
+- [Feather icons](https://github.com/feathericons/feather)
+- [User icons](https://www.iconfinder.com/iconsets/ios-7-icons) 

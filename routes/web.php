@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 /**********************************************************************
  * USERS
@@ -21,4 +19,3 @@ Route::get('/', function () {
 Route::resource('/users', 'UserController');
 Auth::routes(['verify' => true, 'register' => false,]);
 
-Route::get('/home', 'HomeController@index')->name('home');
