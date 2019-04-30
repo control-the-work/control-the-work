@@ -61,5 +61,11 @@
   "User time control log": "Registro de control de tiempo de usuario",
   "Event": "Evento",
   "Date": "Fecha",
-  "Time": "Hora"
+  "Time": "Hora",
+  "Are you sure?": "¿Estás seguro?",
+  "Cancel": "Cancelar",
+  "The event has been created.": "El evento ha sido creado.",
+  "Created!": "¡Creado!",
+  "Error!": "¡Error!",
+  "The event has not been created.": "El evento no ha sido creado."
 }
