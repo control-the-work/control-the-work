@@ -89,3 +89,4 @@ This project uses this components:
 - [Laravel](https://laravel.com/)
 - [Feather icons](https://github.com/feathericons/feather)
 - [User icons](https://www.iconfinder.com/iconsets/ios-7-icons) 
+- [Country List](https://github.com/umpirsky/country-list)

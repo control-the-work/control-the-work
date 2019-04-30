@@ -40,13 +40,19 @@
             <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                     <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link active"><i class="fe fe-home"></i> {{ __('Home') }}</a>
+                        <a href="{{ url('/') }}" class="nav-link active">
+                            <i class="fe fe-home"></i> {{ __('Home') }}</a>
                     </li>
                     <li class="nav-item">
                         <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-clock"></i> {{ __('Time control') }}</a>
                         <div class="dropdown-menu dropdown-menu-arrow">
                             <a href="#" class="dropdown-item "> {{ __('Check in & check out') }}</a>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ action('CompanyController@edit', ['id' => Auth::user()->company->id]) }}" class="nav-link">
+                            <i class="fe fe-shopping-bag"></i> {{ __('Company') }}
+                        </a>
                     </li>
                 </ul>
             </div>
