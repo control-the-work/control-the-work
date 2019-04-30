@@ -17,7 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
  * EVENTS
  *********************************************************************/
 
-//Route::get('events/listDatatables', 'EventController@listDatatables');
+Route::get('events/listDatatables', 'EventController@listDatatables');
 Route::resource('events', 'EventController');
 /**********************************************************************
  * USERS

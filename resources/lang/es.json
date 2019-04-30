@@ -35,5 +35,31 @@
 
   "Verify Email Address": "Confirma tu dirección de correo electrónico",
   "Please click the button below to verify your email address.": "Haz clic en el siguiente botón para verificar tu dirección de correo electrónico.",
-  "If you did not create an account, no further action is required.": "Si no creaste una cuenta, no es necesario realizar ninguna otra acción."
+  "If you did not create an account, no further action is required.": "Si no creaste una cuenta, no es necesario realizar ninguna otra acción.",
+
+  "Administrator":  "Administrador",
+  "Employee":  "Empleado",
+  "Supervisor":  "Supervisor",
+
+  "Profile": "Perfil",
+  "Sign out": "Cerrar sesión",
+  "Copyright": "Copyright",
+  "Open Source time control webapp.": "Aplicación de control de tiempos de código abierto.",
+  "Open Source time control webapp by": "Aplicación de control de tiempos de código abierto por",
+  "FAQ": "FAQ",
+  "Home": "Inicio",
+  "Time control": "Control de tiempos",
+  "Check in & check out": "Registro de entrada y salida",
+
+  "Start": "Inicio",
+  "End": "Fin",
+  "workday": "jornada laboral",
+  "pause": "pausa",
+  "lunch": "comida",
+  "Dashboard": "Escritorio",
+  "Actions": "Acciones",
+  "User time control log": "Registro de control de tiempo de usuario",
+  "Event": "Evento",
+  "Date": "Fecha",
+  "Time": "Hora"
 }

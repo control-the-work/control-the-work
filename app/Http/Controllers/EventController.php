@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class EventController extends Controller
 {
@@ -99,5 +102,42 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+    public function listDatatables(Request $request)
+    {
+        try {
+            if ($request->ajax()) {
+                $user = Auth::user();
+                // todo: make the query with the model
+                $events = DB::table('events')
+                    ->leftJoin('event_types', 'events.event_type_id', '=', 'event_types.id')
+                    ->where('events.user_id', '=', $user->id)
+                    ->whereNull('events.deleted_at')
+                    ->select('event_types.name as event_type_id',
+                        'events.is_start as is_start',
+                        'events.created_at as created_at')
+                    ->orderBy('events.created_at', 'DESC');
+                return DataTables::of($events)
+                    ->editColumn('event_type_id', function ($events) {
+                        return ($events->is_start ? __('Start') : __('End')) . ' ' . __($events->event_type_id);
+                    })
+                    ->editColumn('date', function ($events) {
+                        return Carbon::createFromFormat('Y-m-d H:i:s', $events->created_at)->format('d/m/Y');
+                    })
+                    ->editColumn('time', function ($events) {
+                        return Carbon::createFromFormat('Y-m-d H:i:s', $events->created_at)->format('H:i:s');
+                    })
+                    ->make();
+            } else {
+                return response()->json([
+                    'error' => ''
+                ], 400);
+            }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => $exception->getMessage()
+            ], 400);
+        }
     }
 }

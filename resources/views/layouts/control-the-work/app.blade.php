@@ -17,13 +17,13 @@
     <title>{{ env('APP_NAME', 'Control the work') }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-{{--    <script src="{{ asset('assets/js/require.min.js') }}"></script>
-    <script>
-        requirejs.config({
-            baseUrl: '.'
-        });
-    </script>--}}
-    <!-- Core JS -->
+    {{--    <script src="{{ asset('assets/js/require.min.js') }}"></script>
+        <script>
+            requirejs.config({
+                baseUrl: '.'
+            });
+        </script>--}}
+<!-- Core JS -->
     <script src=" {{ asset('assets/js/vendors/jquery-3.2.1.min.js') }}"></script>
     <script src=" {{ asset('assets/js/core.js') }}"></script>
     <script src=" {{ asset('assets/js/vendors/bootstrap.bundle.min.js') }}"></script>
@@ -31,16 +31,39 @@
     <!-- Dashboard Core -->
     <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet"/>
 {{--    <script src=" {{ asset('assets/js/dashboard.js') }}"></script>--}}
-{{--    <!-- c3.js Charts Plugin -->
-    <link href="{{ asset('assets/plugins/charts-c3/plugin.css') }}" rel="stylesheet" />
-    <script src="{{ asset('assets/plugins/charts-c3/plugin.js') }}"></script>
-    <!-- Google Maps Plugin -->
-    <link href="./assets/plugins/maps-google/plugin.css" rel="stylesheet" />
-    <script src="./assets/plugins/maps-google/plugin.js"></script>--}}
-{{--<!-- Input Mask Plugin -->
-    <script src="{{ asset('assets/plugins/input-mask/plugin.js') }}"></script>
-    <!-- Datatables Plugin -->
-    <script src="{{ asset('assets/plugins/datatables/plugin.js') }}"></script>--}}
+    {{--    <!-- c3.js Charts Plugin -->
+        <link href="{{ asset('assets/plugins/charts-c3/plugin.css') }}" rel="stylesheet" />
+        <script src="{{ asset('assets/plugins/charts-c3/plugin.js') }}"></script>
+        <!-- Google Maps Plugin -->
+        <link href="./assets/plugins/maps-google/plugin.css" rel="stylesheet" />
+        <script src="./assets/plugins/maps-google/plugin.js"></script>--}}
+    {{--<!-- Input Mask Plugin -->
+        <script src="{{ asset('assets/plugins/input-mask/plugin.js') }}"></script>
+        <!-- Datatables Plugin -->
+        <script src="{{ asset('assets/plugins/datatables/plugin.js') }}"></script>--}}
+<!-- Datatables Plugin -->
+    {{--
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    --}}
+    {{--
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+    --}}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables/datatables.min.css') }}"/>
+    <script type="text/javascript" src="{{ asset('assets/plugins/datatables/datatables.min.js') }}"></script>
+    <style>
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_info {
+            display: none;
+        }
+
+        table.dataTable thead .sorting_asc {
+            background-image: none;
+        }
+    </style>
     <!-- SweetAlert2 Plugin -->
     <link href="{{ asset('assets/plugins/sweetalert2/8.9.0/dist/sweetalert2.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset('assets/plugins/sweetalert2/8.9.0/dist/sweetalert2.all.min.js') }}"></script>
@@ -65,11 +88,11 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                 <a class="dropdown-item" href="{{ route('users.show', ['id' => Auth::user()->id]) }}">
-                                    <i class="dropdown-icon fe fe-user"></i> Profile
+                                    <i class="dropdown-icon fe fe-user"></i> {{ __('Profile') }}
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">
-                                    <i class="dropdown-icon fe fe-log-out"></i> Sign out
+                                    <i class="dropdown-icon fe fe-log-out"></i> {{ __('Sign out') }}
                                 </a>
                             </div>
                         </div>
@@ -86,7 +109,7 @@
                     <div class="col-lg order-lg-first">
                         <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                             <li class="nav-item">
-                                <a href="{{ url('/') }}" class="nav-link active"><i class="fe fe-home"></i> Home</a>
+                                <a href="{{ url('/') }}" class="nav-link active"><i class="fe fe-home"></i> {{ __('Home') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-clock"></i> {{ __('Time control') }}</a>
@@ -103,20 +126,20 @@
             <div class="container">
                 <div class="page-header">
                     <h1 class="page-title">
-                        Dashboard
+                        {{ __('Dashboard') }}
                     </h1>
                 </div>
                 <div class="row row-cards">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Actions</h3>
+                                <h3 class="card-title">{{ __('Actions') }}</h3>
                             </div>
                             <div class="mt-3 ml-3">
                                 @foreach($eventTypes as $eventType)
                                     <p>
                                         <button type="button" class="btn btn-primary btn-lg start mr-2" id="{{ $eventType->id }}"><i class="fa fa-play-circle"></i> {{ __('Start') }} {{ __($eventType->name) }} </button>
-                                        <button type="button" class="btn btn-danger btn-lg stop" id="{{ $eventType->id }}"><i class="fa fa-stop-circle"></i> {{ __('Stop') }} {{ __($eventType->name) }}</button>
+                                        <button type="button" class="btn btn-danger btn-lg stop" id="{{ $eventType->id }}"><i class="fa fa-stop-circle"></i> {{ __('End') }} {{ __($eventType->name) }}</button>
                                     </p>
                                 @endforeach
                             </div>
@@ -125,39 +148,18 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">User time control log</h3>
+                                <h3 class="card-title">{{ __('User time control log') }}</h3>
                             </div>
                             <div class="table-responsive">
-                                <table class="table card-table table-striped table-vcenter">
+                                <table id="events-table" class="table card-table table-striped table-vcenter">
                                     <thead>
                                     <tr>
-                                        <th>Event</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th></th>
+                                        <th>{{ __('Event') }}</th>
+                                        <th>{{ __('Date') }}</th>
+                                        <th>{{ __('Time') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Event 1</td>
-                                        <td class="text-nowrap">May 6, 2018</td>
-                                        <td class="text-nowrap">9:35</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Event 1</td>
-                                        <td class="text-nowrap">May 6, 2018</td>
-                                        <td class="text-nowrap">9:35</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Event 1</td>
-                                        <td class="text-nowrap">May 6, 2018</td>
-                                        <td class="text-nowrap">9:35</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Event 1</td>
-                                        <td class="text-nowrap">May 6, 2018</td>
-                                        <td class="text-nowrap">9:35</td>
-                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -174,13 +176,13 @@
                     <div class="row">
                         <div class="col-6 col-md-3">
                             <ul class="list-unstyled mb-0">
-                                <li><a href="{{ url('/') }}">Home</a></li>
+                                <li><a href="{{ url('/') }}">{{ __('Home') }}</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 mt-4 mt-lg-0">
-                    Open Source time control webapp.
+                    {{ __('Open Source time control webapp.') }}
                 </div>
             </div>
         </div>
@@ -198,14 +200,19 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
-                    Copyright © @php echo date("Y"); @endphp <a href="#">Control the work</a>. Open Source time control webapp by <a href="https://www.jesusamieiro.com" target="_blank">Jesús Amieiro</a>. All rights reserved.
+                    {{ __('Copyright') }} ©
+                    @php echo date("Y"); @endphp
+                    <a href="#">Control the work</a>.
+                    {{ __('Open Source time control webapp by') }}
+                    <a href="https://www.jesusamieiro.com" target="_blank">Jesús Amieiro</a>.
+                    {{ __('All rights reserved.') }}
                 </div>
             </div>
         </div>
     </footer>
 </div>
 <script type="text/javascript">
-    window.onload = function() {
+    window.onload = function () {
         $('.start').on('click', function ($event) {
             if (!($(this).hasClass('disabled'))) {
                 var confirmButtonText = $(this).html();
@@ -218,7 +225,34 @@
             var eventId = $(this).attr('id');
             storeEvent(confirmButtonText, eventId, false);
         });
+        $(document).ready(function () {
+            $(function () {
+                $('#events-table').DataTable({
+                    // searchDelay: 1000,
+                    processing: true,
+                    serverSide: true,
+                    // "bAutoWidth": true,  //Disabled auto width calculation....
+                    @if (App::getLocale() === 'es')
+                    "language": {
+                        "url": "{{ url('https://cdn.datatables.net/plug-ins/1.10.18/i18n/Spanish.json') }}",
+                    },
+                    @endif
+                    "pageLength": 10,
+                    "columnDefs": [
+                        {className: "dt-head-left dt-body-left", "targets": [0]},
+                        {className: "dt-head-center dt-body-center", "targets": [1, 2]},
+                    ],
+                    ajax: '{{ action('EventController@listDatatables') }}',
+                    columns: [
+                        {data: 'event_type_id', name: 'event_type_id', "width": "40%", 'searchable': false, 'orderable': false},
+                        {data: 'date', name: 'date', "width": "30%", 'searchable': false, 'orderable': false},
+                        {data: 'time', name: 'time', "width": "30%", 'searchable': false, 'orderable': false},
+                    ]
+                });
+            });
+        });
     };
+
     function disableButtons() {
         $('button, input:button').prop('disabled', true);
     }
@@ -226,6 +260,7 @@
     function enableButtons() {
         $('button, input:button').prop('disabled', false);
     }
+
     function storeEvent(confirmButtonText, eventId, isStart) {
         disableButtons()
         Swal.fire({
