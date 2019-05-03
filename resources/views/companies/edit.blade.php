@@ -5,60 +5,67 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-
-                    <form class="card">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ __('Edit company') }}: {{ $company->name }}</h3>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label class="form-label">Company</label>
-                                        <input type="text" class="form-control" placeholder="Company" value="{{ $company->name }}">
-                                    </div>
+                    {{ Form::model($company, [
+                    'method' => 'PATCH',
+                    'action' => ['CompanyController@update', $company->id],
+                    'class' => 'card',
+                    ]) }}
+                    <div class="card-body">
+                        <h3 class="card-title">{{ __('Edit company') }}: {{ $company->name }}</h3>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    {{ Form::label('name', trans('Company (*)'), ['class' => 'form-label']) }}
+                                    {{ Form::text('name', null, ['class' => 'form-control', 'roles' => 'form', 'placeholder' => 'Company']) }}
+                                    @error('name')
+                                    <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                                    @enderror
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-label">{{ __('Address') }}</label>
-                                        <input type="text" class="form-control" placeholder="{{ __('Company address') }}" value="">
-                                    </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ Form::label('address', trans('Address'), ['class' => 'form-label']) }}
+                                    {{ Form::text('address', null, ['class' => 'form-control', 'roles' => 'form', 'placeholder' => 'Company address']) }}
                                 </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label">{{ __('City') }}</label>
-                                        <input type="text" class="form-control" placeholder="{{ __('City') }}" value="">
-                                    </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    {{ Form::label('city', trans('City'), ['class' => 'form-label']) }}
+                                    {{ Form::text('city', null, ['class' => 'form-control', 'roles' => 'form', 'placeholder' => 'City']) }}
                                 </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label class="form-label">{{ __('Postal Code') }}</label>
-                                        <input type="number" class="form-control" placeholder="{{ __('Postal Code') }}">
-                                    </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    {{ Form::label('postal_code', trans('Postal Code'), ['class' => 'form-label']) }}
+                                    {{ Form::text('postal_code', null, ['class' => 'form-control', 'roles' => 'form', 'placeholder' => 'Postal Code']) }}
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label class="form-label">{{ __('Country') }}</label>
-                                        <select class="form-control custom-select">
-                                            <option value="">Germany</option>
-                                        </select>
-                                    </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    {{ Form::label('country', trans('Country'), ['class' => 'form-label']) }}
+                                    {{ Form::select('country', $countries, $company->country, ['class' => 'form-control  custom-select', 'placeholder' => trans('Select a country')]) }}
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group mb-0">
-                                        <label class="form-label">{{ __('Comments') }}</label>
-                                        <textarea rows="5" class="form-control" placeholder="{{ __('Comments about the company') }}" value=""></textarea>
-                                    </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    {{ Form::label('timezone', trans('Timezone'), ['class' => 'form-label']) }}
+                                    {{ Form::select('timezone', $timezones, $company->timezone, ['class' => 'form-control  custom-select', 'placeholder' => trans('Select a timezone')]) }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-0">
+                                    {{ Form::label('comments', trans('Comments'), ['class' => 'form-label']) }}
+                                    {{ Form::textarea('comments', null, ['class' => 'form-control', 'roles' => 'form', 'placeholder' => 'Comments about the company', 'size' => 'x5']) }}
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer text-right">
-                            <button type="submit" class="btn btn-primary">Update Profile</button>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </div>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('post-footer')
 @endsection

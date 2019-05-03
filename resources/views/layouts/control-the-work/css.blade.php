@@ -23,4 +23,8 @@
     table.dataTable thead .sorting_asc {
         background-image: none;
     }
+
+    .invalid-feedback {
+        display: inherit;
+    }
 </style>

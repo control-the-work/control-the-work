@@ -27,5 +27,6 @@
 </div>
 @include('layouts.control-the-work.js')
 @yield('post-footer')
+@include('layouts.control-the-work.flash-message')
 </body>
 </html>
