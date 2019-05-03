@@ -54,6 +54,11 @@
                             <i class="fe fe-shopping-bag"></i> {{ __('Company') }}
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ action('UserController@index') }}" class="nav-link">
+                            <i class="fe fe-users"></i> {{ __('Users') }}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

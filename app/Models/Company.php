@@ -20,7 +20,14 @@ class Company extends Model
 
     protected $fillable = [
         'name',
+        'address',
+        'city',
+        'postal_code',
+        'country',
+        'comments',
         'subdomain',
+        'timezone',
+        'preferences'
     ];
 
     /**

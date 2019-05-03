@@ -109,6 +109,7 @@ class EventController extends Controller
         try {
             if ($request->ajax()) {
                 $user = Auth::user();
+                $userDateTimeZone = new \DateTimeZone($user->company->timezone);
                 // todo: make the query with the model
                 $events = DB::table('events')
                     ->leftJoin('event_types', 'events.event_type_id', '=', 'event_types.id')
@@ -122,11 +123,11 @@ class EventController extends Controller
                     ->editColumn('event_type_id', function ($events) {
                         return ($events->is_start ? __('Start') : __('End')) . ' ' . __($events->event_type_id);
                     })
-                    ->editColumn('date', function ($events) {
-                        return Carbon::createFromFormat('Y-m-d H:i:s', $events->created_at)->format('d/m/Y');
+                    ->editColumn('date', function ($events) use ($userDateTimeZone) {
+                        return Carbon::createFromFormat('Y-m-d H:i:s', $events->created_at)->setTimezone($userDateTimeZone)->format('d/m/Y');
                     })
-                    ->editColumn('time', function ($events) {
-                        return Carbon::createFromFormat('Y-m-d H:i:s', $events->created_at)->format('H:i:s');
+                    ->editColumn('time', function ($events) use ($userDateTimeZone) {
+                        return Carbon::createFromFormat('Y-m-d H:i:s', $events->created_at)->setTimezone($userDateTimeZone)->format('H:i:s');
                     })
                     ->make();
             } else {

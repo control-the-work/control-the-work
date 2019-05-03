@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -30,7 +32,7 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +43,7 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Company  $company
+     * @param \App\Models\Company $company
      * @return \Illuminate\Http\Response
      */
     public function show(Company $company)
@@ -52,30 +54,35 @@ class CompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Company  $company
+     * @param \App\Models\Company $company
      * @return \Illuminate\Http\Response
      */
     public function edit(Company $company)
     {
-        return view('companies.edit', compact('company'));
+        $timezones = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
+        $timezones = array_combine($timezones, $timezones);
+        $countries = Country::all()->pluck('name', 'id');
+        return view('companies.edit', compact('company', 'countries', 'timezones'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Company  $company
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Company $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
-        //
+        $company->update($request->all());
+        return redirect(action('CompanyController@edit', $company->id))
+            ->with('success', __('Company updated successfully!'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Company  $company
+     * @param \App\Models\Company $company
      * @return \Illuminate\Http\Response
      */
     public function destroy(Company $company)

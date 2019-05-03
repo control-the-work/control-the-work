@@ -25,6 +25,7 @@ Route::resource('events', 'EventController');
 /**********************************************************************
  * USERS
  *********************************************************************/
+Route::get('users/listDatatables', 'UserController@listDatatables');
 Route::resource('/users', 'UserController');
 Auth::routes(['verify' => true, 'register' => false,]);
 

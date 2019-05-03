@@ -67,11 +67,9 @@
             $(document).ready(function () {
                 $(function () {
                     $('#events-table').DataTable({
-                        // searchDelay: 1000,
                         processing: true,
                         serverSide: true,
                         scrollX: false,
-                        // "bAutoWidth": true,  //Disabled auto width calculation....
                         @if (App::getLocale() === 'es')
                         "language": {
                             "url": "{{ url('https://cdn.datatables.net/plug-ins/1.10.18/i18n/Spanish.json') }}",
@@ -109,7 +107,6 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: '#ec6c62',
-                // cancelButtonColor: '#d33',
                 confirmButtonText: confirmButtonText,
                 cancelButtonText: '{{ __('Cancel') }}',
             }).then((result) => {
@@ -133,7 +130,6 @@
                                 timer: 1500,
                             }).then(function () {
                                 $('#events-table').DataTable().draw(false);
-                                {{--                        window.location.href = '{{ action('GestionAdministrativaController@index', $administrativo->id) }}'--}}
                             })
                         },
                         error: function () {
