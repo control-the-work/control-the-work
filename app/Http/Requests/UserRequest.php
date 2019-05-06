@@ -23,8 +23,38 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $rules = [];
+        switch ($this->getControllerMethod()) {
+            case 'store' :
+                $rules = [
+                    'name' => 'required',
+                    'email' => 'required|email|unique:users,email',
+                    'password' => 'required|min:6|confirmed',
+                    'role' => 'required',
+                    'timezone' => 'required',
+                ];
+                break;
+            case 'update':
+                $rules = [
+                    'name' => 'required',
+                    'email' => 'required|email|unique:users,email,'. $this->route('user')->id,
+                    'password' => 'nullable|min:6|confirmed',
+                    'role' => 'required',
+                    'timezone' => 'required',
+                ];
+                break;
+        }
+        return $rules;
+    }
+
+    public function getControllerMethod()
+    {
+        try{
+            $fullMethod = ($this->route()->getAction())['controller'];
+            return substr($fullMethod, strpos($fullMethod, '@') + 1);
+        }
+        catch (\Exception $e){
+            return '';
+        }
     }
 }

@@ -13,6 +13,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">{{ __('Users') }}</h3>
+                            <a href="{{ action('UserController@create') }}" type="button" class="btn btn-primary ml-auto">{{ __('New user') }}</a>
                         </div>
                         <div class="table-responsive">
                             <table id="users-table" class="table card-table table-striped table-vcenter ">
@@ -60,7 +61,7 @@
                             {data: 'name_surname', name: 'name_surname', "width": "20%", 'searchable': false, 'orderable': false},
                             {data: 'email', name: 'email', "width": "25%", 'searchable': false, 'orderable': false},
                             {data: 'role_name', name: 'role_name', "width": "20%", 'searchable': false, 'orderable': false},
-                            {data: 'email_verified_at', name: 'email_verified_at', "width": "15%", 'searchable': false, 'orderable': false},
+                            {data: 'email_verified_at', name: 'email_verified_at', "width": "15%", 'searchable': false, 'orderable': false, "defaultContent": "<i>Not set</i>"},
                             {data: 'actions', name: 'actions', "width": "20%", 'searchable': false, 'orderable': false},
                         ]
                     });
