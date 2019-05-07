@@ -9,18 +9,19 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class ResetPasswordTest extends DuskTestCase
 {
     /**
-     * A Dusk test example.
+     * Assert that a non-existent user cannot reset the password
      *
+     * @throws \Throwable
      * @return void
      */
-    public function testExample()
+    public function testResetUserThatDoesNotExist()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/password/reset');
             $browser->type('email', 'amieiro+no+exists@gmail.com');
-            $browser->press('Enviar enlace');
+            $browser->press('Send Password Reset Link');
             $browser->assertPathIs('/password/reset');
-            $browser->assertSee(__('No podemos encontrar ningún usuario con ese correo electrónico'));
+            $browser->assertSee(__('We can\'t find a user with that e-mail address.'));
         });
     }
 }
