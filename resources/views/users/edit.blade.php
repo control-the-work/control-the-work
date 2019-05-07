@@ -13,7 +13,7 @@
 
                     @include ('users.form', [
                     'H3text' => __('Edit the user'),
-                    'submitButtonText' => __('Update the user')])
+                    'submitButtonText' => __('Update user')])
 
                     {{ Form::close() }}
                 </div>

@@ -31,7 +31,7 @@
             <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
                 {{ __('Copyright') }} ©
                 @php echo date("Y"); @endphp
-                <a href="#">Control the work</a>.
+                <a href="https://www.controlthework.com" target="_blank">Control the work</a>.
                 {{ __('Open Source time control webapp by') }}
                 <a href="https://www.jesusamieiro.com" target="_blank">Jesús Amieiro</a>.
                 {{ __('All rights reserved.') }}

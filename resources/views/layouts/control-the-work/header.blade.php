@@ -14,7 +14,7 @@
                     </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" href="{{ route('users.show', ['id' => Auth::user()->id]) }}">
+                        <a class="dropdown-item" href="{{ action('UserController@edit', ['id' => Auth::user()->id]) }}">
                             <i class="dropdown-icon fe fe-user"></i> {{ __('Profile') }}
                         </a>
                         <div class="dropdown-divider"></div>
@@ -43,12 +43,12 @@
                         <a href="{{ url('/') }}" class="nav-link active">
                             <i class="fe fe-home"></i> {{ __('Home') }}</a>
                     </li>
-                    <li class="nav-item">
+{{--                    <li class="nav-item">
                         <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-clock"></i> {{ __('Time control') }}</a>
                         <div class="dropdown-menu dropdown-menu-arrow">
                             <a href="#" class="dropdown-item "> {{ __('Check in & check out') }}</a>
                         </div>
-                    </li>
+                    </li>--}}
                     <li class="nav-item">
                         <a href="{{ action('CompanyController@edit', ['id' => Auth::user()->company->id]) }}" class="nav-link">
                             <i class="fe fe-shopping-bag"></i> {{ __('Company') }}

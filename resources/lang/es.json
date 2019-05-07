@@ -68,5 +68,32 @@
   "The event has been created.": "El evento ha sido creado.",
   "Created!": "¡Creado!",
   "Error!": "¡Error!",
-  "The event has not been created.": "El evento no ha sido creado."
+  "The event has not been created.": "El evento no ha sido creado.",
+
+  "Users": "Usuarios",
+
+  "Edit company": "Editar empresa",
+  "Address": "Dirección",
+  "City": "Ciudad",
+  "Postal Code": "Código postal",
+  "Country": "País",
+  "Select a country": "Selecciona un país",
+  "Timezone": "Zona horaria",
+  "Select a timezone": "Selecciona una zona horaria",
+  "Comments": "Comentarios",
+  "Update company": "Actualizar empresa",
+
+  "Add user": "Añadir usuario",
+  "Name": "Nombre",
+  "Email": "Correo electrónico",
+  "Role": "Rol",
+  "Verified": "Verificado",
+
+  "Edit the user": "Editar el usuario",
+  "Surname": "Apellidos",
+  "Password confirmation": "Confirmación de la contraseña",
+  "Select a role": "Selecciona un rol",
+  "Update user": "Actualizar usuario",
+
+  "Add an user": "Añadir un usuario"
 }

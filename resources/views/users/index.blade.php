@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">{{ __('Users') }}</h3>
-                            <a href="{{ action('UserController@create') }}" type="button" class="btn btn-primary ml-auto">{{ __('New user') }}</a>
+                            <a href="{{ action('UserController@create') }}" type="button" class="btn btn-primary ml-auto">{{ __('Add user') }}</a>
                         </div>
                         <div class="table-responsive">
                             <table id="users-table" class="table card-table table-striped table-vcenter ">
