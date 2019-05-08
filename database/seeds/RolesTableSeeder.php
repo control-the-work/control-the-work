@@ -19,6 +19,9 @@ class RolesTableSeeder extends Seeder
             'name' => 'Employee',
         ]);
         Role::create([
+            'name' => 'Labor union',
+        ]);
+        Role::create([
             'name' => 'Supervisor',
         ]);
     }
