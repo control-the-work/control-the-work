@@ -1,6 +1,7 @@
 ## Control the work
 
-_Control the work_ is is a web application to control the . We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[Control the work](https://www.controlthework.com/) is is a web application 
+to control the checkins and checkouts in the workplace.
 
 - Responsive.
 - Multilingual.
@@ -11,7 +12,7 @@ _Control the work_ is is a web application to control the . We believe developme
 Download the repo from GitHub to your server:
 
 ```
-$ git clone xxxxx 
+$ git clone https://github.com/control-the-work/control-the-work
 ```
 
 Install the dependencies:
@@ -73,7 +74,7 @@ That's all folks!
 
 If you discover a security vulnerability within "Control the work", please 
 send an e-mail to Jesús Amieiro via 
-[jesus@controlthework.com](mailto:jesus@controlthework.com). 
+[hello@controlthework.com](mailto:hello@controlthework.com). 
 All security vulnerabilities will be promptly addressed.
 
 ## License
