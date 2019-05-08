@@ -5,21 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use App\Models\Country;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -73,6 +65,7 @@ class CompanyController extends Controller
         if (!Auth::user()->hasAnyRole(['Administrator'])) {
             return back()->with('error', __('You can not execute this action!'));
         }
+        $this->middleware(['auth', 'verified']);
         $timezones = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
         $timezones = array_combine($timezones, $timezones);
         $countries = Country::all()->pluck('name', 'id');
