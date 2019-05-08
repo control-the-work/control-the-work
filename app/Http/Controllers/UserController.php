@@ -164,6 +164,7 @@ class UserController extends Controller
                 $users = DB::table('users')
                     ->leftjoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
                     ->leftjoin('roles', 'roles.id', '=', 'model_has_roles.role_id')
+                    ->where('users.company_id', $user->company_id)
                     ->whereNull('deleted_at')
                     ->select('users.id', 'users.name', 'users.surname', 'users.email', 'users.email_verified_at', 'roles.name as role_name')
                     ->orderBy('users.name', 'ASC');
