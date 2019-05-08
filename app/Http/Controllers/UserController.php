@@ -42,6 +42,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->hasAnyRole(['Administrator'])) {
+            return back()->with('error', __('You can not execute this action!'));
+        }
         $timezones = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
         $timezones = array_combine($timezones, $timezones);
         $roles = Role::orderBy('name', 'ASC')->get()->pluck('name', 'id');
@@ -58,6 +61,9 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        if (!Auth::user()->hasAnyRole(['Administrator'])) {
+            return back()->with('error', __('You can not execute this action!'));
+        }
         $input = $request->all();
         $input['password'] = Hash::make($request['password']);
         $user = new User($input);
@@ -92,6 +98,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (!((Auth::user() == $user) || (Auth::user()->hasAnyRole(['Administrator'])))) {
+            return back()->with('error', __('You can not execute this action!'));
+        }
         $timezones = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
         $timezones = array_combine($timezones, $timezones);
         $roles = Role::orderBy('name', 'ASC')->get()->pluck('name', 'id');
@@ -109,6 +118,9 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
+        if (!((Auth::user() == $user) || (Auth::user()->hasAnyRole(['Administrator'])))) {
+            return back()->with('error', __('You can not execute this action!'));
+        }
         $oldRoles = $user->getRoleNames();
         $oldEmail = $user->email;
         $input = $request->all();
@@ -126,7 +138,7 @@ class UserController extends Controller
         $role = Role::findById($input['role']);
         $user->assignRole($role->name);
         // Send the validation email if the email has changed
-        $message= 'User updated successfully!';
+        $message = 'User updated successfully!';
         if ($oldEmail !== $input['email']) {
             $user->sendEmailVerificationNotification();
             $message .= ' Check the user email to verify it.';
@@ -144,6 +156,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         // todo: check if it is the unique administrator in the company
+        if (!Auth::user()->hasAnyRole(['Administrator'])) {
+            return response()->json([
+                'error' => __('You can not execute this action!')
+            ], 400);
+        }
         try {
             $user = User::findOrFail($id);
             $user->delete();
@@ -171,6 +188,9 @@ class UserController extends Controller
                 return DataTables::of($users)
                     ->editColumn('name_surname', function ($users) {
                         return '<a href="' . action('UserController@edit', $users->id) . '">' . $users->name . ' ' . $users->surname . '</a>';
+                    })
+                    ->editColumn('role_name', function ($users) {
+                        return __($users->role_name);
                     })
                     ->editColumn('email_verified_at', function ($users) use ($userDateTimeZone) {
                         return $users->email_verified_at ? Carbon::createFromFormat('Y-m-d H:i:s', $users->email_verified_at)->setTimezone($userDateTimeZone)->format('d/m/Y') : __('Not verified');

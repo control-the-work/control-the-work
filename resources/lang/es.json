@@ -66,6 +66,10 @@
   "Time": "Hora",
   "Are you sure?": "¿Estás seguro?",
   "Cancel": "Cancelar",
+  "Delete the user": "Borrar el usuario",
+  "Deleted!": "¡Borrado!",
+  "The user has been deleted.": "El usuario ha sido borrado.",
+  "The user has not been deleted.": "El usuario no ha sido borrado.",
   "The event has been created.": "El evento ha sido creado.",
   "Created!": "¡Creado!",
   "Error!": "¡Error!",
@@ -96,5 +100,7 @@
   "Select a role": "Selecciona un rol",
   "Update user": "Actualizar usuario",
 
-  "Add an user": "Añadir un usuario"
+  "Add an user": "Añadir un usuario",
+
+  "You can not execute this action!": "¡No puedes ejecutar esta acción!"
 }

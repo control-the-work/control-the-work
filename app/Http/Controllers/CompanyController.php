@@ -6,6 +6,7 @@ use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
@@ -69,6 +70,9 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
+        if (!Auth::user()->hasAnyRole(['Administrator'])) {
+            return back()->with('error', __('You can not execute this action!'));
+        }
         $timezones = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
         $timezones = array_combine($timezones, $timezones);
         $countries = Country::all()->pluck('name', 'id');
@@ -84,6 +88,9 @@ class CompanyController extends Controller
      */
     public function update(CompanyRequest $request, Company $company)
     {
+        if (!Auth::user()->hasAnyRole(['Administrator'])) {
+            return back()->with('error', __('You can not execute this action!'));
+        }
         $company->update($request->all());
         return redirect(action('CompanyController@edit', $company->id))
             ->with('success', __('Company updated successfully!'));

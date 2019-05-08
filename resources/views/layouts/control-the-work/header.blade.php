@@ -49,16 +49,18 @@
                             <a href="#" class="dropdown-item "> {{ __('Check in & check out') }}</a>
                         </div>
                     </li>--}}
-                    <li class="nav-item">
-                        <a href="{{ action('CompanyController@edit', ['id' => Auth::user()->company->id]) }}" class="nav-link">
-                            <i class="fe fe-shopping-bag"></i> {{ __('Company') }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ action('UserController@index') }}" class="nav-link">
-                            <i class="fe fe-users"></i> {{ __('Users') }}
-                        </a>
-                    </li>
+                    @hasanyrole(['Administrator'])
+                        <li class="nav-item">
+                            <a href="{{ action('CompanyController@edit', ['id' => Auth::user()->company->id]) }}" class="nav-link">
+                                <i class="fe fe-shopping-bag"></i> {{ __('Company') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ action('UserController@index') }}" class="nav-link">
+                                <i class="fe fe-users"></i> {{ __('Users') }}
+                            </a>
+                        </li>
+                    @endhasanyrole
                 </ul>
             </div>
         </div>
