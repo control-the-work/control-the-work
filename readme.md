@@ -18,7 +18,7 @@ $ git clone https://github.com/control-the-work/control-the-work
 Install the dependencies:
 
 ```
-$ composer install 
+$ composer install --no-dev
 ```
 
 Create the .env file where the application stores some important variables:
