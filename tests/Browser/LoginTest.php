@@ -28,6 +28,8 @@ class LoginTest extends DuskTestCase
      * Assert that a non-existent user cannot login in the system
      *
      * @throws \Throwable
+     * @return void
+     *
      */
     public function testUserThatDoesNotExistCanNotLogin()
     {
@@ -46,6 +48,8 @@ class LoginTest extends DuskTestCase
      * system and that he sees the verification alert
      *
      * @throws \Throwable
+     * @return void
+     *
      */
     public function testUserThatExistsAndItIsNotVerifiedCanNotLogin() {
         $company = Company::first();
@@ -71,6 +75,8 @@ class LoginTest extends DuskTestCase
      * system if he uses incorrect credentials
      *
      * @throws \Throwable
+     * @return void
+     *
      */
     public function testUserThatExistsAndItIsVerifiedCanNotLoginWithAnIncorrectPassword() {
         $company = Company::first();
@@ -81,7 +87,6 @@ class LoginTest extends DuskTestCase
         $user->assignRole('Employee');
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/login');
-            $browser->screenshot("a");
             $browser->type('#email', $user->email);
             $browser->type('#password', '123456');
             $browser->press('Sign in');
@@ -99,6 +104,8 @@ class LoginTest extends DuskTestCase
      * system if he uses correct credentials
      *
      * @throws \Throwable
+     * @return void
+     *
      */
     public function testUserThatExistsAndItIsVerifiedCanLoginWithAnCorrectPassword() {
         $company = Company::first();

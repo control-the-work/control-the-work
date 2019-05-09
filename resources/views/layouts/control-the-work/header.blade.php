@@ -7,18 +7,18 @@
             <div class="d-flex order-lg-2 ml-auto">
                 <div class="dropdown">
                     <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-                        <span class="avatar" style="background-image: url({{ asset('assets/images/icons/user-male.svg') }})"></span>
+                        <span class="avatar" id="avatar" style="background-image: url({{ asset('assets/images/icons/user-male.svg') }})"></span>
                         <span class="ml-2 d-none d-lg-block">
                       <span class="text-default">{{ Auth::user()->name }} {{ Auth::user()->surname }}</span>
                       <small class="text-muted d-block mt-1">{{ __(Auth::user()->roles()->first()->name) }}</small>
                     </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" href="{{ action('UserController@edit', ['id' => Auth::user()->id]) }}">
+                        <a id="profile" class="dropdown-item" href="{{ action('UserController@edit', ['id' => Auth::user()->id]) }}">
                             <i class="dropdown-icon fe fe-user"></i> {{ __('Profile') }}
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <a id="logout" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                             <i class="dropdown-icon fe fe-log-out"></i> {{ __('Sign out') }}
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -124,14 +124,16 @@ class UserController extends Controller
         $oldRoles = $user->getRoleNames();
         $oldEmail = $user->email;
         $input = $request->all();
-        if ("" != trim($input['password'])) {
+        if ('' !== trim($input['password'])) {
             $input['password'] = Hash::make($input['password']);
+        } else {
+            unset($input['password']);
         }
         if ($oldEmail !== $input['email']) {
             $input['email_verified_at'] = null;
         }
         $user->update($input);
-        // Reemove and assign the role
+        // Remove and assign the role
         foreach ($oldRoles as $oldRole) {
             $user->removeRole($oldRole);
         }
