@@ -9,10 +9,16 @@ to control the checkins and checkouts in the workplace.
 
 ## Installation
 
-Download the repo from GitHub to your server:
+Access to the server folder:
 
 ```
-$ git clone https://github.com/control-the-work/control-the-work
+$ cd /var/www/your-domain.com
+```
+
+Download the repo from GitHub into this folder:
+
+```
+$ git clone https://github.com/control-the-work/control-the-work .
 ```
 
 Install the dependencies:
@@ -25,6 +31,12 @@ Create the .env file where the application stores some important variables:
 
 ```
 $ cp .env.example .env
+```
+
+Change the APP_URL in the .env file to adapt it to your installation:
+
+```
+APP_URL=http://controlthework.test
 ```
 
 Change the database values in the .env file to adapt it to your installation:
@@ -62,10 +74,47 @@ required data:
 $ php artisan migrate --seed
 ```
 
+If the database is not empty, please delete all the information if it is the
+first installation. The next command deletes all the tables and the information
+in the database:
+
+```
+$ php artisan migrate:fresh --seed
+```
+
 Execute the installer and answer to the questions: 
 
 ```
 $ php artisan control-the-work:install 
+```
+
+You can execute the installer in English (en) or Spanish (es) using the 
+"--language" parameter:
+
+```
+$ php artisan control-the-work:install --language=es
+```
+
+Be careful to point your Virtual Host (Apache) or your Server Block (NGINX) 
+to the "public" folder.
+
+**Virtual Host (Apache)**
+```
+<VirtualHost *:80>
+    DocumentRoot "/var/www/your-domain.com/public"
+    ServerName www.your-domain.com
+    # Other directives here
+</VirtualHost>
+```
+**Server Block (NGINX)**
+```
+server {
+    listen 80;
+    listen 443 ssl http2;
+    server_name www.your-domain.com;
+    root "/var/www/your-domain.com/public";
+    # Other directives here    
+    }
 ```
 
 That's all folks!

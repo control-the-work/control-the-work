@@ -43,14 +43,13 @@ class InstallationCommand extends Command
     {
         try {
             // todo: check if some .env values are set
-
             // Get the language for the command
             $language = $this->option('language');
             if (config('locale.status')) {
                 if (array_key_exists($language, config('locale.languages'))) {
                     App::setLocale($language);
-                } else {
-                    $this->error(__('The language (--language= parameter) is not between the application languages.'));
+                } elseif(null !== $this->option('language')) {
+                    $this->error(__('The language (--language=parameter) is not between the application languages.'));
                     exit(1);
                 }
             }
@@ -70,7 +69,8 @@ class InstallationCommand extends Command
             if (($roles->isEmpty()) ||
                 (!(($roles[0]->name === 'Administrator') &&
                     ($roles[1]->name === 'Employee') &&
-                    ($roles[2]->name === 'Supervisor')))) {
+                    ($roles[2]->name === 'Labor union') &&
+                    ($roles[3]->name === 'Supervisor')))) {
                 $this->error(__('The installer doesn\'t find some required roles. Please, execute the migration first.'));
                 exit(1);
             }
