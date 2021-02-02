@@ -15,7 +15,7 @@ class CreateAppTable extends Migration
     {
         Schema::create('app', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('preferences')->nullable();
+            $table->text('preferences')->nullable();
             $table->timestamps();
         });
     }
