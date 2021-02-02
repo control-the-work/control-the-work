@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_login_at')->nullable();
             $table->timestamp('password_request_at')->nullable();
             $table->string('timezone')->default('Europe/Madrid')->comment('Timezone');
-            $table->json('preferences')->nullable();
+            $table->text('preferences')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
