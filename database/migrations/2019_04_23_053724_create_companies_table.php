@@ -24,7 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->text('comments')->nullable()->comment('Comments');
             $table->string('subdomain')->nullable()->comment('subdomain');
             $table->string('timezone')->nullable()->default('Europe/Madrid')->comment('Timezone');
-            $table->json('preferences')->nullable();
+            $table->text('preferences')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
